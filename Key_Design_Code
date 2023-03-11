@@ -1,1 +1,62 @@
+%% Key Design Code - REV 1 
+% Tim Mellor and Hidar Abugalal 
+% MEE 342 - Principals of Mechanical Design 
+%
+% Inputs: Tortion, Diameter of the Shaft, Factor of Saftey 
+% Outputs; The MINIMUM size (length, width, hight) of the Key, and the
+%             Force on the Key
 
+% Clearing the workspace 
+clear; clc; 
+
+%% ====Inputs====
+% Factor of Saftey 
+n = ; % Add value Here 
+
+% Shaft Diameter (m)
+d = ; % Add value here 
+
+% Tortion (Pa)
+t = ; % Add value here 
+
+%% Known Constants
+
+% Pi 
+p = 3.141592653589793238;
+
+% 316 Stainless Steel Yeild Strength
+S1 = 290000000; 
+
+% 1045 Carbon Steel Yeild Strength 
+S2 = 310000000; 
+
+% Force on Key
+F = 1.568.*t;
+
+%% Computing Dimentions 
+
+% Length 
+l = 1.25.*d; 
+
+% Width for both types of Steel 
+w1 = (8.*S1)./(p.*n.*(d.^2).*t);
+w2 = (8.*S2)./(p.*n.*(d.^2).*t);
+
+% Height 
+h1 = 1.178.*((t.*n)./(S1.*d));
+h2 = 1.178.*((t.*n)./(S2.*d));
+
+%% Displaying Results
+
+fprintf('The Force on the Key is: %d \r \r',F)
+
+fprintf('The Minimum Dimetions for a Key made of 316 Stainless Steel is: \r')
+fprintf('Length: %d Meters \r', l)
+fprintf('Width: %d Meters \r', w1)
+fprintf('Height: %d Meters \r \r', h1)
+
+
+fprintf('The Minimum Dimetions for a Key made of 1045 Carbon Steel is: \r')
+fprintf('Length: %d Meters \r', l)
+fprintf('Width: %d Meters \r', w2)
+fprintf('Height: %d Meters', h2)
