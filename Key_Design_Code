@@ -1,4 +1,4 @@
-%% Key Design Code - REV 1 
+%% Key Design Code - REV 2 
 % Tim Mellor and Hidar Abugalal 
 % MEE 342 - Principals of Mechanical Design 
 %
@@ -11,52 +11,52 @@ clear; clc;
 
 %% ====Inputs====
 % Factor of Saftey 
-n = ; % Add value Here 
+n = 2; % Add value Here 
 
 % Shaft Diameter (m)
-d = ; % Add value here 
+d = 0.05; % Add value here 
 
 % Tortion (Pa)
-t = ; % Add value here 
+t = 100; % Add value here 
 
 %% Known Constants
-
-% Pi 
-p = 3.141592653589793238;
-
-% 316 Stainless Steel Yeild Strength
-S1 = 290000000; 
-
-% 1045 Carbon Steel Yeild Strength 
-S2 = 310000000; 
+p = 3.141592653589793238; % pi
+S1 = 290000000; % 316 Stainless Steel yeild Strength 
+S2 = 310000000; %1045 Carbon Steel Yeild Strength 
 
 % Force on Key
-F = 1.568.*t;
+F = (2*t)./d; 
 
-%% Computing Dimentions 
+%% Length 
+l = 1.5.*d; % International Standard 
 
-% Length 
-l = 1.25.*d; 
+%% Width for both types of Steel 
+% ======= giving INSANLEY high values for width ======
+w1 = (2.*t.*n)./(S1.*l.*d); 
+w2 = (2.*t.*n)./(S2.*l.*d);
 
-% Width for both types of Steel 
-w1 = (8.*S1)./(p.*n.*(d.^2).*t);
-w2 = (8.*S2)./(p.*n.*(d.^2).*t);
+%% Height for both types of Steel
+h1 = (2.*F.*n)./(S1.*l);
+h2 = (2.*F.*n)./(S2.*l);
 
-% Height 
-h1 = 1.178.*((t.*n)./(S1.*d));
-h2 = 1.178.*((t.*n)./(S2.*d));
+%% Converting to Milimeters 
+l = l*1000; 
+h1 = h1*1000; 
+h2 = h2*1000; 
+w1 = w1*1000;
+w2 = w2*1000;
 
 %% Displaying Results
 
 fprintf('The Force on the Key is: %d \r \r',F)
 
 fprintf('The Minimum Dimetions for a Key made of 316 Stainless Steel is: \r')
-fprintf('Length: %d Meters \r', l)
-fprintf('Width: %d Meters \r', w1)
-fprintf('Height: %d Meters \r \r', h1)
+fprintf('Length: %d Milimeters \r', l)
+fprintf('Width: %d Milimeters \r', w1)
+fprintf('Height: %d Milimeters \r \r', h1)
 
 
 fprintf('The Minimum Dimetions for a Key made of 1045 Carbon Steel is: \r')
-fprintf('Length: %d Meters \r', l)
-fprintf('Width: %d Meters \r', w2)
-fprintf('Height: %d Meters', h2)
+fprintf('Length: %d Milimeters \r', l)
+fprintf('Width: %d Milimeters \r', w2)
+fprintf('Height: %d Milimeters', h2)
